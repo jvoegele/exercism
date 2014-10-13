@@ -1,13 +1,17 @@
 (ns bob (:require [clojure.string :as str]))
 
+(defn silence? [s] (= (str/trim s) ""))
+
 (defn question? [s] (= (last s) \?))
 
 (defn yelling? [s]
-  (letfn [(uppercase? [c] (Character/isUpperCase c))
-          (at-least-one-uppercase? [s] (->> s (filter uppercase?) count pos?))]
-    (and (at-least-one-uppercase? s) (= (str/upper-case s) s))))
-
-(defn silence? [s] (= (str/trim s) ""))
+  (letfn [(at-least-one-uppercase? [s]
+            (->> s
+                 (filter #(Character/isUpperCase %))
+                 count
+                 pos?))]
+    (and (at-least-one-uppercase? s)
+         (= (str/upper-case s) s))))
 
 (defn response-for [s]
   (cond
