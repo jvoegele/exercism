@@ -1,3 +1,4 @@
 **/target
 scala/**/project
 cpp/**/build
+erlang/**/*.beam
