@@ -21,33 +21,33 @@ position(Robot) ->
     {_Direction, Position} = get_robot(Robot),
     Position.
 
--spec place(robot(), direction(), position()) -> robot().
+-spec place(robot(), direction(), position()) -> ok.
 place(Robot, Direction, Position) ->
     put(Robot, {Direction, Position}),
-    Robot.
+    ok.
 
--spec left(robot()) -> robot().
+-spec left(robot()) -> ok.
 left(Robot) ->
     {Direction, Position} = get_robot(Robot),
     place(Robot, turn(left, Direction), Position).
 
--spec right(robot()) -> robot().
+-spec right(robot()) -> ok.
 right(Robot) ->
     {Direction, Position} = get_robot(Robot),
     place(Robot, turn(right, Direction), Position).
 
--spec advance(robot()) -> robot().
+-spec advance(robot()) -> ok.
 advance(Robot) ->
     {Direction, Position} = get_robot(Robot),
     place(Robot, Direction, move(Direction, Position)).
 
--spec control(robot(), string()) -> robot().
+-spec control(robot(), string()) -> ok.
 control(Robot, Instructions) ->
     lists:foreach(fun(I) ->
                           apply_instruction(Robot, I)
                   end,
                   lists:filter(fun is_valid_instruction/1, Instructions)),
-    Robot.
+    ok.
 
 get_robot(Robot) ->
     Result = get(Robot),
