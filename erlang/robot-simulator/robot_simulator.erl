@@ -11,12 +11,12 @@
 create() ->
     make_ref().
 
--spec direction(robot()) -> direction().
+-spec direction(robot()) -> direction() | undefined.
 direction(Robot) ->
     {Direction, _Position} = get_robot(Robot),
     Direction.
 
--spec position(robot()) -> position().
+-spec position(robot()) -> position() | {undefined, undefined}.
 position(Robot) ->
     {_Direction, Position} = get_robot(Robot),
     Position.
@@ -46,7 +46,8 @@ control(Robot, Instructions) ->
     lists:foreach(fun(I) ->
                           apply_instruction(Robot, I)
                   end,
-                  lists:filter(fun is_valid_instruction/1, Instructions)).
+                  lists:filter(fun is_valid_instruction/1, Instructions)),
+    Robot.
 
 get_robot(Robot) ->
     Result = get(Robot),
