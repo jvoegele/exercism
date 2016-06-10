@@ -6,6 +6,16 @@ defmodule Words do
   """
   @spec count(String.t) :: map() 
   def count(sentence) do
-  
+    sentence
+    |> String.downcase
+    |> String.split(~r/[^\w-]|[_]/u, trim: true)
+    |> frequencies
+  end
+
+  defp frequencies(words) do
+    Enum.reduce(words, Map.new,
+      fn(w, acc) ->
+        Map.update(acc, w, 1, &(&1 + 1))
+      end)
   end
 end
