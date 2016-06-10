@@ -1,15 +1,14 @@
-if System.get_env("EXERCISM_TEST_EXAMPLES") do
-  Code.load_file("example.exs")
-else
+if !System.get_env("EXERCISM_TEST_EXAMPLES") do
   Code.load_file("list_ops.exs")
 end
 
 ExUnit.start
+ExUnit.configure exclude: :pending, trace: true
 
 defmodule ListOpsTest do
   alias ListOps, as: L
 
-  use ExUnit.Case, async: true
+  use ExUnit.Case
 
   defp odd?(n), do: rem(n, 2) == 1
 
