@@ -1,13 +1,12 @@
-if System.get_env("EXERCISM_TEST_EXAMPLES") do
-  Code.load_file("example.exs")
-else
+if !System.get_env("EXERCISM_TEST_EXAMPLES") do
   Code.load_file("sublist.exs")
 end
 
 ExUnit.start
+ExUnit.configure exclude: :pending, trace: true
 
 defmodule SublistTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case
 
   test "empty equals empty" do
     assert Sublist.compare([], []) == :equal
@@ -66,6 +65,10 @@ defmodule SublistTest do
 
   test "superlist at end" do
     assert Sublist.compare([1,2,3,4,5],[3,4,5]) == :superlist
+  end
+
+  test "1 and 2 does not contain 3" do
+    assert Sublist.compare([1,2], [3]) == :unequal
   end
 
   test "partially matching superlist at start" do
