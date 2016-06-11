@@ -1,10 +1,9 @@
-if System.get_env("EXERCISM_TEST_EXAMPLES") do
-  Code.load_file("example.exs")
-else
+if !System.get_env("EXERCISM_TEST_EXAMPLES") do
   Code.load_file("anagram.exs")
 end
 
 ExUnit.start
+ExUnit.configure exclude: :pending, trace: true
 
 defmodule AnagramTest do
   use ExUnit.Case
