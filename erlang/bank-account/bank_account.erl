@@ -12,29 +12,39 @@
          terminate/2,
          code_change/3]).
 
+-export_type([account/0]).
+
 -record(state, {balance = 0 :: number(),
                 is_open = true :: boolean()}).
+
+-opaque account() :: pid().
 
 %%%===================================================================
 %%% API functions
 %%%===================================================================
 
+-spec create() -> account().
 create() ->
     {ok, Account} = gen_server:start_link(?MODULE, 0, []),
     Account.
 
+-spec balance(account()) -> number() | {error, account_closed}.
 balance(Account) ->
     gen_server:call(Account, balance).
 
+-spec deposit(account(), number()) -> number().
 deposit(Account, Amount) ->
     gen_server:call(Account, {deposit, Amount}).
 
+-spec withdraw(account(), number()) -> number().
 withdraw(Account, Amount) ->
     gen_server:call(Account, {withdraw, Amount}).
 
+-spec charge(account(), number()) -> number().
 charge(Account, Amount) ->
     gen_server:call(Account, {charge, Amount}).
 
+-spec close(account()) -> number().
 close(Account) ->
     gen_server:call(Account, close).
 
