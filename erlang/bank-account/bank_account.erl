@@ -55,14 +55,10 @@ close(Account) ->
 init(InitialBalance) ->
     {ok, #state{balance = InitialBalance}}.
 
+handle_call(balance, _From, State = #state{is_open=true, balance=Balance}) ->
+    {reply, Balance, State};
 handle_call(balance, _From, State) ->
-    Reply = case State#state.is_open of
-                true ->
-                    State#state.balance;
-                false ->
-                    {error,account_closed}
-            end,
-    {reply, Reply, State};
+    {reply, {error,account_closed}, State};
 
 handle_call({deposit, Amount}, _From, State) when Amount > 0 ->
     NewBalance = State#state.balance + Amount,
