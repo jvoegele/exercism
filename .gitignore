@@ -2,5 +2,6 @@
 scala/**/project
 cpp/**/build
 erlang/**/*.beam
+**/_build
 haskell/**/.stack-work/
 haskell/**/*.cabal
