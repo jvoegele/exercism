@@ -10,7 +10,7 @@ defmodule Prime do
 
   defp prime_stream() do
     Stream.iterate(2, &(1 + &1))
-    |> Stream.filter(& prime?/1)
+    |> Stream.filter(&prime?/1)
   end
 
   # NOTE: The algorithm encoded in the below `prime?/1` and `prime?/2`
