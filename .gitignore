@@ -5,3 +5,4 @@ erlang/**/*.beam
 **/_build
 haskell/**/.stack-work/
 haskell/**/*.cabal
+**/node_modules
