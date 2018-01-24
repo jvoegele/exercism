@@ -6,3 +6,4 @@ erlang/**/*.beam
 haskell/**/.stack-work/
 haskell/**/*.cabal
 **/node_modules
+**/package-lock.json
