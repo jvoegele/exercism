@@ -6,3 +6,7 @@ erlang/**/*.beam
 haskell/**/.stack-work/
 haskell/**/*.cabal
 **/node_modules
+java/**/build
+java/**/build.*
+java/**/.gradle
+java/**/.idea

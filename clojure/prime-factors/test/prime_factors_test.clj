@@ -34,3 +34,7 @@
 
 (deftest a-huge-number
   (is (= [11, 9539, 894119] (prime-factors/of 93819012551))))
+
+(deftest another-huge-number
+  (is (= [5 2000000011] (prime-factors/of 10000000055))))
+
