@@ -2,7 +2,7 @@ defmodule BeerSong do
   @doc """
   Get a single verse of the beer song
   """
-  @spec verse(integer) :: String.t
+  @spec verse(integer) :: String.t()
   def verse(n) do
     """
     #{String.capitalize(on_the_wall(n))}, #{bottles_of_beer(n)}.
@@ -13,7 +13,7 @@ defmodule BeerSong do
   @doc """
   Get the entire beer song for a given range of numbers of bottles.
   """
-  @spec lyrics(Range.t) :: String.t
+  @spec lyrics(Range.t()) :: String.t()
   def lyrics(range \\ 99..0) do
     Enum.map_join(range, "\n", &verse/1)
   end
